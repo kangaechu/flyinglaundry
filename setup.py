@@ -12,7 +12,7 @@ setup(
     name='flying_laundry',
     version='0.0.1',
     description='Check whether your laundries can fly.',
-    long_description=Readme.md,
+    long_description='README.md',
     author='kangaechu',
     author_email='kangae2@gmail.com',
     install_requires=read_requirements(),
