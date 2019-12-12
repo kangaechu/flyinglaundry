@@ -10,29 +10,29 @@ class TestTenki(TestCase):
 
     def test_weather(self):
         weather = self.tenki.weather()
-        self.assertEqual(len(weather), 24)
+        self.assertEqual(len(weather), 48)
 
     def test_temperature(self):
         temperature = self.tenki.temperature()
-        self.assertEqual(len(temperature), 24)
+        self.assertEqual(len(temperature), 48)
 
     def test_prob_precip(self):
         prob_precip = self.tenki.prob_precip()
-        self.assertEqual(len(prob_precip), 24)
+        self.assertEqual(len(prob_precip), 48)
 
     def test_precipitation(self):
         precipitation = self.tenki.precipitation()
-        self.assertEqual(len(precipitation), 24)
+        self.assertEqual(len(precipitation), 48)
 
     def test_humidity(self):
         humidity = self.tenki.humidity()
-        self.assertEqual(len(humidity), 24)
+        self.assertEqual(len(humidity), 48)
 
     def test_wind_blow(self):
         wind_blow = self.tenki.wind_blow()
-        self.assertEqual(len(wind_blow), 24)
+        self.assertEqual(len(wind_blow), 48)
 
     def test_wind_speed(self):
         wind_speed = self.tenki.wind_speed()
-        self.assertEqual(len(wind_speed), 24)
+        self.assertEqual(len(wind_speed), 48)
 
