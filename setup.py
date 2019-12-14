@@ -9,7 +9,7 @@ def read_requirements():
     return requirements
 
 setup(
-    name='flying_laundry',
+    name='flyinglaundry',
     version='0.0.1',
     description='Check whether your laundries can fly.',
     long_description='README.md',
