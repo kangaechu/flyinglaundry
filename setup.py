@@ -1,6 +1,9 @@
 import os, sys
 from setuptools import setup, find_packages
 
+sys.path.append('./flyinglaundry')
+sys.path.append('./test')
+
 def read_requirements():
     """Parse requirements from requirements.txt."""
     reqs_path = os.path.join('.', 'requirements.txt')
@@ -18,5 +21,6 @@ setup(
     install_requires=read_requirements(),
     url='https://github.com/kangaechu/flyinglaundry',
     license='mit',
+    test_suite = 'test',
     packages=find_packages(exclude=('tests', 'docs'))
 )
