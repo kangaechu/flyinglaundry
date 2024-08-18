@@ -22,10 +22,10 @@ jobs:
         run: |
           mkdir dist
           # yamllint disable-line rule:line-length
-          CGO_ENABLED=0 go build -ldflags="-s -w" -trimpath -v -o dist lambda/main.go
+          CGO_ENABLED=0 go build -ldflags="-s -w" -trimpath -v -o dist main.go
       - uses: fujiwara/lambroll@v1
         with:
-          version: v1.0.4
+          version: v1.0.6
       - name: Configure AWS credentials from Test account
         uses: aws-actions/configure-aws-credentials@v4
         with:
