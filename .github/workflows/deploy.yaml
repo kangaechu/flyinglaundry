@@ -1,0 +1,46 @@
+---
+name: deploy
+permissions:
+  contents: read
+  id-token: write
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@v4
+      - name: Set up Go
+        uses: actions/setup-go@v5
+        with:
+          go-version-file: '.go-version'
+      - name: Build
+        run: |
+          mkdir dist
+          # yamllint disable-line rule:line-length
+          CGO_ENABLED=0 go build -ldflags="-s -w" -trimpath -v -o dist lambda/main.go
+      - uses: fujiwara/lambroll@v1
+        with:
+          version: v1.0.4
+      - name: Configure AWS credentials from Test account
+        uses: aws-actions/configure-aws-credentials@v4
+        with:
+          role-to-assume: arn:aws:iam::291147976989:role/flyinglaundry-lambda-deploy
+          aws-region: ap-northeast-1
+
+      - name: Add profile credentials to ~/.aws/credentials
+        run: |
+          aws configure set aws_access_key_id $AWS_ACCESS_KEY_ID --profile private
+          aws configure set aws_secret_access_key $AWS_SECRET_ACCESS_KEY --profile private
+          aws configure set aws_session_token $AWS_SESSION_TOKEN --profile private
+
+      - name: deploy via lambroll
+        run: |
+          lambroll deploy --profile=private --src="dist"
+        env:
+          TENKI_URL: ${{ secrets.TENKI_URL }}
+          SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}

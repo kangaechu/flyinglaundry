@@ -1,29 +1,19 @@
 # flying_laundry
 
-我が家は南風で風速5m以上だと洗濯物が飛んでいきます。
-これからの天気情報をtenki.jpから取得し、条件を満たしたら何らかの方法で通知します。
+In our house, laundry flies away when the south wind is 5 meters per second or more.
+It retrieves weather information from the specified URL on tenki.jp and notifies Slack if the conditions are met.
 
-## installation
+## usage
 
-```shell script
-# pipenvのインストール
-pip install pipenv
+Get the 1-hour weather URL for the region you want from tenki.jp.
+For Sapporo, it would be https://tenki.jp/forecast/1/2/1400/1100/1hour.html.
 
-# 依存パッケージのインストール
-pipenv install
+Set that URL in the environment variable TENKI_URL.
 
-# シェルの起動
-pipenv shell
+Also, set the Slack Webhook URL in the environment variable SLACK_WEBHOOK_URL.
+
+## deploy
+
+このリポジトリでは、lambrollを使ってデプロイしています。
+
 ```
-
-## useage
-
-tenki.jpから取得したい地方の1時間天気のURLを持ってきます。
-札幌であれば https://tenki.jp/forecast/1/2/1400/1100/1hour.html 。
-
-app.py のurlを指定します。
-
-```shell script
-python app.py
-```
-
