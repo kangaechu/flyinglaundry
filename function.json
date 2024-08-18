@@ -3,7 +3,7 @@
   "Handler": "main",
   "MemorySize": 128,
   "Role": "arn:aws:iam::291147976989:role/flyinglaundry-lambda",
-  "Runtime": "go1.x",
+  "Runtime": "provided.al2023",
   "Timeout": 60,
   "Environment": {
     "Variables": {
