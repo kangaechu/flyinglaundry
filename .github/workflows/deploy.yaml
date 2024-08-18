@@ -22,7 +22,7 @@ jobs:
         run: |
           mkdir dist
           # yamllint disable-line rule:line-length
-          CGO_ENABLED=0 go build -ldflags="-s -w" -trimpath -v -o dist main.go
+          CGO_ENABLED=0 GOOS=linux GOARCH=arm64 go build -ldflags="-s -w" -trimpath -v -o dist main.go
       - uses: fujiwara/lambroll@v1
         with:
           version: v1.0.6

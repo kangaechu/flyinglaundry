@@ -2,6 +2,9 @@
   "FunctionName": "flyinglaundry",
   "Handler": "main",
   "MemorySize": 128,
+  "Architectures": [
+    "arm64"
+  ],
   "Role": "arn:aws:iam::291147976989:role/flyinglaundry-lambda",
   "Runtime": "provided.al2023",
   "Timeout": 60,
