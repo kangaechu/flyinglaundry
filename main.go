@@ -7,12 +7,13 @@ import (
 	"fmt"
 	"github.com/aws/aws-lambda-go/lambda"
 	"github.com/kangaechu/flyinglaundry/tenki"
+	"io"
 	"net/http"
 	"os"
 	"time"
 )
 
-func HandleRequest(ctx context.Context) (*string, error) {
+func HandleRequest(_ context.Context) (*string, error) {
 	// TENKI_URL : https://tenki.jp/forecast/1/2/1400/1100/1hour.html
 	url := os.Getenv("TENKI_URL")
 	res, err := http.Get(url)
@@ -24,19 +25,19 @@ func HandleRequest(ctx context.Context) (*string, error) {
 		return nil, fmt.Errorf("status code error: %d %s", res.StatusCode, res.Status)
 	}
 
-	tenki, err := tenki.NewTenki(res.Body)
+	tnk, err := tenki.NewTenki(res.Body)
 	if err != nil {
 		return nil, err
 	}
 
 	currentHour := time.Now().Hour()
 	duration := 24
-	flyingLaundry := tenki.CheckFlyingLaundry(currentHour, duration)
+	flyingLaundry := tnk.CheckFlyingLaundry(currentHour, duration)
 
-	SLACK_WEBHOOK_URL := os.Getenv("SLACK_WEBHOOK_URL")
-	if flyingLaundry && SLACK_WEBHOOK_URL != "" {
+	SlackWebhookUrl := os.Getenv("SLACK_WEBHOOK_URL")
+	if flyingLaundry && SlackWebhookUrl != "" {
 		responseMessage := "@channel 🪽洗濯物ふっとび注意🌪️"
-		if err := sendSlack(SLACK_WEBHOOK_URL, responseMessage); err != nil {
+		if err := sendSlack(SlackWebhookUrl, responseMessage); err != nil {
 			return nil, err
 		}
 	}
@@ -63,7 +64,9 @@ func sendSlack(url, message string) error {
 	if err != nil {
 		return err
 	}
-	defer resp.Body.Close()
+	defer func(Body io.ReadCloser) {
+		_ = Body.Close()
+	}(resp.Body)
 
 	if resp.StatusCode != http.StatusOK {
 		return fmt.Errorf("failed to send message to Slack, status code: %d", resp.StatusCode)
