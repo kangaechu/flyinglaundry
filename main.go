@@ -35,12 +35,13 @@ func HandleRequest(ctx context.Context) (*string, error) {
 
 	SLACK_WEBHOOK_URL := os.Getenv("SLACK_WEBHOOK_URL")
 	if flyingLaundry && SLACK_WEBHOOK_URL != "" {
-		responseMessage := "@channel 洗濯物ふっとび注意"
+		responseMessage := "@channel 🪽洗濯物ふっとび注意🌪️"
 		if err := sendSlack(SLACK_WEBHOOK_URL, responseMessage); err != nil {
 			return nil, err
 		}
 	}
 	returnString := fmt.Sprintf("Flying Laundry: %t", flyingLaundry)
+	println(returnString)
 	return &returnString, nil
 }
 
