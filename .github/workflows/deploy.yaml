@@ -13,9 +13,9 @@ jobs:
     runs-on: ubuntu-latest
     timeout-minutes: 5
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v4.4.0
       - name: Set up Go
-        uses: actions/setup-go@v5
+        uses: actions/setup-go@v5.6.0
         with:
           go-version-file: '.go-version'
       - name: Build
@@ -27,7 +27,7 @@ jobs:
         with:
           version: v1.0.6
       - name: Configure AWS credentials from Test account
-        uses: aws-actions/configure-aws-credentials@v4
+        uses: aws-actions/configure-aws-credentials@v4.3.1
         with:
           role-to-assume: arn:aws:iam::291147976989:role/flyinglaundry-lambda-deploy
           aws-region: ap-northeast-1
