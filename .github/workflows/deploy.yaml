@@ -27,7 +27,7 @@ jobs:
         with:
           version: v1.0.6
       - name: Configure AWS credentials from Test account
-        uses: aws-actions/configure-aws-credentials@v4.3.1
+        uses: aws-actions/configure-aws-credentials@v6.3.0
         with:
           role-to-assume: arn:aws:iam::291147976989:role/flyinglaundry-lambda-deploy
           aws-region: ap-northeast-1
