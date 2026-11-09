@@ -11,7 +11,7 @@ workflows:
     '.github/workflows/lint.yaml':
         - 'actions/checkout@v4.4.0'
         - 'actions/setup-go@v5.6.0'
-        - 'golangci/golangci-lint-action@v6.5.2'
+        - 'golangci/golangci-lint-action@v9.3.0'
     '.github/workflows/test.yaml':
         - 'actions/checkout@v4.4.0'
         - 'actions/setup-go@v5.6.0'
@@ -43,8 +43,8 @@ dependencies:
         commit: 'sha1-2cbebe4dac9b73613f0b2320a79fb4102b14da92'
         owner_id: 67804
         repo_id: 217447668
-    'golangci/golangci-lint-action@v6.5.2':
-        ref: 'v6.5.2'
-        commit: 'sha1-55c2c1448f86e01eaae002a5a3a9624417608d84'
+    'golangci/golangci-lint-action@v9.3.0':
+        ref: 'v9.3.0'
+        commit: 'sha1-ba0d7d2ec06a0ea1cb5fa41b2e4a3ab91d21278a'
         owner_id: 35628013
         repo_id: 232539879
